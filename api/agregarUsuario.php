@@ -11,7 +11,7 @@
     
     $objChat = json_decode($json);
 
-    $sql = "INSERT INTO chat(usuario, mensaje) VALUES('$objChat->usuario', '$objChat->mensaje')";
+    $sql = "INSERT INTO mensajes(usuario, mensaje, hora) VALUES('$objChat->usuario', '$objChat->mensaje', '$objChat->hora')";
     
     $query = $mysqli->query($sql);
 

@@ -1,25 +1,44 @@
-const urlObtenerUsuarios = 'https://comprehensive-games.000webhostapp.com/chat/api/obtenerUsuarios.php'
-const urlAgregarUsuario = 'https://comprehensive-games.000webhostapp.com/chat/api/agregarUsuario.php'
+const urlObtenerUsuarios = 'https://martincrsn.000webhostapp.com/chat/api/obtenerUsuarios.php'
+const urlAgregarUsuario = 'https://martincrsn.000webhostapp.com/chat/api/agregarUsuario.php'
 
 const notificacion = document.getElementById("notificacion")
+let user = document.getElementById("user")
+let modal = document.getElementById("modal")
 
 let listaChat = []
 let conteo = 0
 let usuario
 
 if(localStorage.getItem("usuario")){
-    console.log("existe")
+    
+    modal.style.opacity = 0;
+    modal.style.display = "none";
     usuario = localStorage.getItem("usuario")
-}else{
-    usuario = prompt("Cual es tu nombre?")
-    localStorage.setItem("usuario", usuario)
 }
+
+function ingreso(){
+        usuario = user.value
+        
+        if(user.value !== ""){
+            modal.style.opacity = 0;
+            modal.style.display = "none";
+            localStorage.setItem("usuario", usuario)
+        }else{
+            alert("Debe completar el campo User")
+        }
+       
+
+    }
+    
+
+
 
 
 const objChat = {
     idUsuario:"",
     usuario:"",
     mensaje: "",
+    hora: ""
 }
 
 let btn = document.getElementById("btn")
@@ -32,24 +51,23 @@ const formulario = document.querySelector('#formulario')
 const usuarioInput = document.querySelector('#usuario')
 const mensajeInput = document.querySelector('#mensaje')
 
-formulario.addEventListener("submit", validarFormulario)
 
 
-function validarFormulario(e){
-    e.preventDefault();
+
+function validarFormulario(){
+    
+    let date = new Date()
 
     objChat.idUsuario = Date.now()
     objChat.usuario = usuario
     objChat.mensaje = mensajeInput.value
-
+    objChat.hora = `${date.getHours()}:${date.getMinutes()}`
+    
     console.log(objChat)
 
     agregarMensaje()
 
-    notificacion.play()
-
     
-
 
 
 }
@@ -57,48 +75,61 @@ function validarFormulario(e){
 async function obtenerMensajes(){
     listaChat = await fetch(urlObtenerUsuarios)
     .then(respuesta => respuesta.json())
-    .then(datos => datos)
+    .then(datos => (datos))
     .catch(error => console.log(error))
 
-    if(conteo !== listaChat.length){
+    if(listaChat.length !== conteo){
         limpiarHTML()
+   
         mostrarMensajes()
+        
+    
         conteo = listaChat.length
     }
-            
+    
+    
+   
 }
 
-setInterval(() => {
 
-    obtenerMensajes() 
-},1000)
-
-
-
+   obtenerMensajes()
+    setInterval(obtenerMensajes,1000)
+   
 
 
 function mostrarMensajes(){
+    
+
 
     const divMensajes = document.querySelector('.div-mensajes')
-    const span = document.querySelector('span')
-
+    
+    
         listaChat.forEach(chat => {
-    const {idUsuario, usuario, mensaje} = chat
+    const {idUsuario, usuario, mensaje, hora} = chat
 
     
     const p = document.createElement('p')
     const s = document.createElement('span')
+    const span2 = document.createElement('span')
+    const img = document.createElement('img')
     
+    
+    
+
+        img.setAttribute("class", "avatar2")
         s.textContent = `${usuario}: ${mensaje}`
         s.dataset.id = idUsuario
-
-        const hr = document.createElement('hr')
+        span2.textContent = `${hora}`    
+        
         const contenedor = document.createElement('div')
         contenedor.setAttribute("class", "contenedor")
+        span2.setAttribute("class", "span2")
 
         
         divMensajes.appendChild(contenedor)
+        contenedor.appendChild(img)
         contenedor.appendChild(s)
+        contenedor.appendChild(span2)
         
 
         container.scrollTop =container.scrollHeight;
@@ -107,6 +138,12 @@ function mostrarMensajes(){
             s.setAttribute("class", "color")
             contenedor.style.justifyContent = "flex-end"
         }
+
+        if(usuario == "Martin"){
+            img.setAttribute("class", "avatar")
+            
+        }
+
 
 })
    
@@ -146,5 +183,6 @@ function limpiarHTML() {
 function limpiarObjeto() {
     objChat.idUsuario = ''
     objChat.mensaje = ''
+    objChat.hora = ''
     
 }

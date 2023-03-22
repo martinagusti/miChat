@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,29 +9,37 @@
 </head>
 <body>
 
+
     <header>
-        <h2>MiChat</h2>
+        <h2>MiChat 😏</h2>
     </header>
 
-    <div class="container" id="container">
+   
+        <div class="container" id="container">
         
-        <div class="div-mensajes">
-           
-    
+            <div class="div-mensajes">
+            
+            </div>
+        
         </div>
-    
-       
-    </div>
-    
-       <form action="#" id="formulario">
-            <textarea name="" id="mensaje" cols="30" rows="2" placeholder="Escriba su mensaje"></textarea>
         
-            <button type="submit" id="btn">>></button>
-        </form>
- 
+           <form action="#" id="formulario">
+                <textarea name="" id="mensaje" cols="30" rows="2" placeholder="Escriba su mensaje"></textarea>
+            
+                <button type="submit" id="btn" onclick="validarFormulario()">>></button>
+            </form>
+     
     
-  
-        <audio src="./notificacion.mp3" id="notificacion"></audio>
+    
+            <div class="modal" id="modal">
+                <label for="user">Usuario</label><input type="text" id="user" placeholder="Ingresa un nombre">
+                <button id="btn_ingresar" onclick="ingreso()">Ingresar</button>
+            </div>
+
+
+   
+
+    
 
     <script src="chat.js" ></script>
 </body>

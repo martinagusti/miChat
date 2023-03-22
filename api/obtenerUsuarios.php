@@ -10,7 +10,7 @@
     // PRUEBAS
     //$usuario = "cheko";
     
-    $sql = "SELECT * FROM chat";
+    $sql = "SELECT * FROM mensajes";
     $query = $mysqli->query($sql);
     
     $datos = array();
