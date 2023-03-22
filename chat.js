@@ -1,6 +1,8 @@
 const urlObtenerUsuarios = 'https://martincrsn.000webhostapp.com/chat/api/obtenerUsuarios.php'
 const urlAgregarUsuario = 'https://martincrsn.000webhostapp.com/chat/api/agregarUsuario.php'
 
+
+//prueba git 
 const notificacion = document.getElementById("notificacion")
 let user = document.getElementById("user")
 let modal = document.getElementById("modal")
