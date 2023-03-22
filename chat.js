@@ -70,9 +70,6 @@ function validarFormulario(){
 
     agregarMensaje()
 
-    
-
-
 }
 
 async function obtenerMensajes(){
@@ -105,10 +102,12 @@ function mostrarMensajes(){
 
 
     const divMensajes = document.querySelector('.div-mensajes')
-    
+    const df = document.createDocumentFragment()
     
         listaChat.forEach(chat => {
     const {idUsuario, usuario, mensaje, hora} = chat
+
+    
 
     
     const p = document.createElement('p')
@@ -129,13 +128,13 @@ function mostrarMensajes(){
         span2.setAttribute("class", "span2")
 
         
-        divMensajes.appendChild(contenedor)
+        df.appendChild(contenedor)
         contenedor.appendChild(img)
         contenedor.appendChild(s)
         contenedor.appendChild(span2)
         
 
-        container.scrollTop =container.scrollHeight;
+        
 
         if(usuario == localStorage.getItem("usuario")){
             s.setAttribute("class", "color")
@@ -147,8 +146,12 @@ function mostrarMensajes(){
             
         }
 
+        container.scrollTop =container.scrollHeight;
+        divMensajes.append(df)
+
 
 })
+       
    
 }
 
