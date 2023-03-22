@@ -3,6 +3,7 @@ const urlAgregarUsuario = 'https://martincrsn.000webhostapp.com/chat/api/agregar
 
 
 //prueba git 
+//trabajando en la nueva rama
 const notificacion = document.getElementById("notificacion")
 let user = document.getElementById("user")
 let modal = document.getElementById("modal")
